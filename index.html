@@ -380,9 +380,24 @@
                 <div class="intro-deco-bottom">✨ 🎀 ✨</div>
             </div>
             <div class="btn-group-intro">
-                <button class="btn-yes-big" id="introYesBtn" onclick="startGame()">愿意 💖</button>
+                <button class="btn-yes-big" id="introYesBtn" onclick="showConsentPage()">愿意 💖</button>
                 <button class="btn-no-small" onclick="rejectIntro()">不愿意</button>
             </div>
+        </div>
+
+        <!-- 同意后的确认页 -->
+        <div class="page" id="consentPage">
+            <div class="heart-big">💕</div>
+            <div class="intro-card">
+                <div class="intro-deco">🎉 🎊 🎉</div>
+                <div class="title" style="color:#ff6b9d; text-shadow:none; margin-bottom:15px;">太好了！</div>
+                <div class="intro-text">
+                    <p>那我们开始吧~ 🐰</p>
+                    <p>要认真答题哦！📝</p>
+                </div>
+                <div class="intro-deco-bottom">✨ 💕 ✨</div>
+            </div>
+            <button class="btn" onclick="startGame()">开始答题 💌</button>
         </div>
 
         <!-- 第一题 -->
@@ -472,12 +487,16 @@
             document.getElementById(pageId).classList.add('active');
         }
 
+        function showConsentPage() {
+            showPage('consentPage');
+        }
+
         function rejectIntro() {
             introRejectCount = (introRejectCount || 0) + 1;
             const yesBtn = document.getElementById('introYesBtn');
-            const newScale = 1 + introRejectCount * 0.15;
+            const newScale = 1 + introRejectCount * 0.2; // 统一+20%
             yesBtn.style.transform = `scale(${newScale})`;
-            yesBtn.style.fontSize = (24 + introRejectCount * 3) + 'px';
+            yesBtn.style.fontSize = (24 + introRejectCount * 4) + 'px';
             
             const messages = [
                 '不要嘛...求你了 🥺',

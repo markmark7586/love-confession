@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💕 给邓欣怡小姐的一封信</title>
+    <title>💕 给邓欣怡小姐</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -26,60 +26,6 @@
             100% { background-position: 0% 50%; }
         }
         
-        /* 漂浮装饰 */
-        .floating-hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-        
-        .floating-hearts span {
-            position: absolute;
-            font-size: 20px;
-            animation: floatUp 10s linear infinite;
-            opacity: 0.6;
-        }
-        
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
-        }
-        
-        .sparkles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        .sparkles::before, .sparkles::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255,182,193,0.4) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(255,218,185,0.3) 0%, transparent 40%);
-            animation: sparkleMove 15s ease-in-out infinite;
-        }
-        
-        @keyframes sparkleMove {
-            0%, 100% { transform: translate(0, 0); }
-            33% { transform: translate(-30px, 30px); }
-            66% { transform: translate(30px, -30px); }
-        }
-        
         .container {
             width: 90%;
             max-width: 420px;
@@ -88,175 +34,200 @@
             z-index: 1;
         }
         
-        .page {
-            display: none;
-            animation: fadeIn 0.8s ease;
-        }
-        
+        .page { display: none; animation: fadeIn 0.8s ease; }
         .page.active { display: block; }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        /* 开场页 */
-        .start-page .heart-big {
-            font-size: 100px;
-            animation: heartbeat 1.2s infinite;
+        /* 开场煽情页 */
+        .intro-page .heart-big {
+            font-size: 80px;
+            animation: heartbeat 1.5s infinite;
             margin-bottom: 20px;
-            filter: drop-shadow(0 0 20px rgba(255,107,157,0.6));
         }
         
         @keyframes heartbeat {
             0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.1); }
-            50% { transform: scale(1); }
-            75% { transform: scale(1.15); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .intro-text {
+            font-size: 18px;
+            color: #fff;
+            line-height: 2;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+            padding: 0 10px;
+        }
+        
+        .intro-text p {
+            margin-bottom: 10px;
         }
         
         .title {
-            font-size: 42px;
+            font-size: 36px;
             font-weight: bold;
             color: #fff;
-            text-shadow: 3px 3px 10px rgba(0,0,0,0.2);
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-        }
-        
-        .subtitle {
-            font-size: 20px;
-            color: #fff;
-            margin-bottom: 50px;
-            opacity: 0.95;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
         }
         
         .btn {
             background: linear-gradient(135deg, #ff6b9d, #ff8e53);
             color: #fff;
-            font-size: 22px;
-            padding: 18px 60px;
+            font-size: 20px;
+            padding: 15px 50px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 10px 30px rgba(255,107,157,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(255,107,157,0.4);
+            animation: pulse 2s infinite;
         }
         
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s;
-        }
-        
-        .btn:hover::before { left: 100%; }
-        
-        .btn:hover {
-            transform: scale(1.08) translateY(-2px);
-            box-shadow: 0 15px 40px rgba(255,107,157,0.7);
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
         
         /* 答题页 */
-        .question-page { animation: slideUp 0.6s ease; }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
         .progress {
-            font-size: 18px;
+            font-size: 16px;
             color: #fff;
-            margin-bottom: 25px;
-            font-weight: bold;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
-        }
-        
-        .progress-bar {
-            width: 200px;
-            height: 6px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 3px;
-            margin: 10px auto;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #ff6b9d, #ff8e53);
-            border-radius: 3px;
-            transition: width 0.5s ease;
-        }
-        
-        .question-box {
-            background: rgba(255,255,255,0.92);
-            border-radius: 24px;
-            padding: 35px 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.5) inset;
-            backdrop-filter: blur(10px);
-        }
-        
-        .question-title {
-            font-size: 22px;
-            color: #ff6b9d;
             margin-bottom: 20px;
             font-weight: bold;
         }
         
+        .question-box {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+        
+        .question-title {
+            font-size: 20px;
+            color: #ff6b9d;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
         .question-text {
-            font-size: 24px;
+            font-size: 22px;
             color: #333;
-            margin-bottom: 30px;
-            line-height: 1.6;
+            margin-bottom: 25px;
+            line-height: 1.5;
             font-weight: 600;
         }
         
         .options {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
+            align-items: stretch;
         }
         
         .option {
             background: linear-gradient(135deg, #fff5f8, #fff0f5);
             border: 2px solid #ffd1dc;
-            border-radius: 18px;
-            padding: 18px;
+            border-radius: 15px;
+            padding: 15px;
             font-size: 18px;
             color: #555;
             cursor: pointer;
             transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
+            text-align: left;
+            display: flex;
+            align-items: center;
         }
         
         .option:hover {
             background: linear-gradient(135deg, #ff6b9d, #ff8e53);
             color: #fff;
             border-color: #ff6b9d;
-            transform: scale(1.03) translateX(5px);
-            box-shadow: 0 8px 25px rgba(255,107,157,0.3);
+            transform: scale(1.02);
         }
         
         .option.correct {
             background: linear-gradient(135deg, #ff6b9d, #ff8e53) !important;
             color: #fff !important;
             border-color: #ff6b9d !important;
-            animation: correctPulse 0.5s ease;
         }
         
-        @keyframes correctPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-            100% { transform: scale(1); }
+        /* 对齐ABCD */
+        .option-label {
+            display: inline-block;
+            width: 30px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        /* 表白页 */
+        .confess-page .heart-big {
+            font-size: 100px;
+            animation: heartbeat 1.2s infinite;
+            margin-bottom: 15px;
+        }
+        
+        .confess-title {
+            font-size: 42px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+            margin-bottom: 10px;
+        }
+        
+        .confess-text {
+            font-size: 28px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        
+        .confess-question {
+            font-size: 32px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            min-height: 200px;
+            width: 100%;
+        }
+        
+        .yes-btn {
+            background: linear-gradient(135deg, #ff6b9d, #ff8e53);
+            color: #fff;
+            font-size: 28px;
+            padding: 20px 70px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(255,107,157,0.4);
+            transition: all 0.3s;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .no-btn {
+            background: rgba(200,200,200,0.8);
+            color: #888;
+            font-size: 16px;
+            padding: 12px 35px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+            z-index: 5;
         }
         
         /* 弹窗 */
@@ -273,7 +244,7 @@
             align-items: center;
         }
         
-        .modal.active { display: flex; animation: fadeIn 0.3s ease; }
+        .modal.active { display: flex; }
         
         .modal-content {
             background: #fff;
@@ -292,7 +263,7 @@
         }
         
         .modal-emoji { font-size: 60px; margin-bottom: 15px; }
-        .modal-text { font-size: 22px; color: #333; margin-bottom: 25px; font-weight: bold; }
+        .modal-text { font-size: 20px; color: #333; margin-bottom: 25px; font-weight: bold; line-height: 1.5; }
         .modal-btn {
             background: linear-gradient(135deg, #ff6b9d, #ff8e53);
             color: #fff;
@@ -303,207 +274,93 @@
             cursor: pointer;
         }
         
-        /* 表白页 */
-        .confess-page { position: relative; }
-        
-        .confess-page .heart-big {
-            font-size: 120px;
-            animation: heartbeat 1s infinite;
-            filter: drop-shadow(0 0 30px rgba(255,107,157,0.8));
-            margin-bottom: 15px;
-        }
-        
-        .confess-title {
-            font-size: 48px;
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 3px 3px 10px rgba(0,0,0,0.25);
-            margin-bottom: 15px;
-            letter-spacing: 3px;
-        }
-        
-        .confess-text {
-            font-size: 32px;
-            color: #fff;
-            margin-bottom: 15px;
-            font-weight: 500;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
-        }
-        
-        .confess-question {
-            font-size: 36px;
-            font-weight: bold;
-            color: #fff;
-            margin-bottom: 60px;
-            text-shadow: 3px 3px 10px rgba(0,0,0,0.25);
-            letter-spacing: 2px;
-        }
-        
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 25px;
-            position: relative;
-            min-height: 200px;
-        }
-        
-        .yes-btn {
-            background: linear-gradient(135deg, #ff6b9d, #ff8e53);
-            color: #fff;
-            font-size: 28px;
-            padding: 20px 70px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(255,107,157,0.5);
-            transition: all 0.3s;
-            position: relative;
-            z-index: 10;
-        }
-        
-        .yes-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 40px rgba(255,107,157,0.7);
-        }
-        
-        .no-btn {
-            background: rgba(200,200,200,0.8);
-            color: #888;
-            font-size: 16px;
-            padding: 12px 35px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            position: absolute;
-            transition: all 0.3s;
-            z-index: 5;
-        }
-        
-        /* 哭泣飘屏 */
-        .tear-drop {
-            position: fixed;
-            font-size: 30px;
-            animation: tearFall 3s ease-in forwards;
-            pointer-events: none;
-            z-index: 999;
-        }
-        
-        @keyframes tearFall {
-            0% { opacity: 1; transform: translateY(0) rotate(0deg); }
-            100% { opacity: 0; transform: translateY(100vh) rotate(360deg); }
-        }
-        
         /* 成功页 */
-        .success-page { animation: successZoom 1s ease; }
-        
-        @keyframes successZoom {
-            0% { transform: scale(0.5); opacity: 0; }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); opacity: 1; }
-        }
+        .success-page { animation: fadeIn 1s ease; }
         
         .success-page .heart-big {
-            font-size: 100px;
-            animation: heartbeat 0.8s infinite;
-            filter: drop-shadow(0 0 40px rgba(255,107,157,0.9));
+            font-size: 80px;
+            animation: heartbeat 1s infinite;
+            margin-bottom: 20px;
         }
         
         .success-title {
-            font-size: 56px;
+            font-size: 48px;
             font-weight: bold;
             color: #fff;
-            text-shadow: 3px 3px 12px rgba(0,0,0,0.3);
-            margin-bottom: 20px;
-            animation: titleGlow 2s ease infinite;
-        }
-        
-        @keyframes titleGlow {
-            0%, 100% { text-shadow: 3px 3px 12px rgba(0,0,0,0.3), 0 0 30px rgba(255,107,157,0.5); }
-            50% { text-shadow: 3px 3px 12px rgba(0,0,0,0.3), 0 0 60px rgba(255,107,157,0.8); }
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
         }
         
         .success-text {
-            font-size: 28px;
+            font-size: 24px;
             color: #fff;
-            margin-bottom: 15px;
-            font-weight: 600;
+            margin-bottom: 10px;
         }
         
         .success-sub {
-            font-size: 20px;
+            font-size: 18px;
             color: #fff;
-            opacity: 0.95;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
+            opacity: 0.9;
         }
         
         .date-text {
-            font-size: 18px;
+            font-size: 16px;
             color: #fff;
-            background: rgba(255,255,255,0.25);
-            padding: 12px 30px;
-            border-radius: 25px;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 25px;
+            border-radius: 20px;
             display: inline-block;
-            margin-bottom: 30px;
-            backdrop-filter: blur(5px);
+            margin-bottom: 20px;
         }
         
         .fireworks {
-            font-size: 60px;
-            animation: fireworksBounce 0.8s infinite;
+            font-size: 50px;
+            animation: bounce 1s infinite;
         }
         
-        @keyframes fireworksBounce {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-20px) scale(1.2); }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
         
-        .success-hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        /* 移动端适配 */
         @media (max-width: 480px) {
-            .title { font-size: 32px; }
-            .confess-title { font-size: 36px; }
-            .confess-question { font-size: 28px; }
-            .success-title { font-size: 42px; }
-            .question-text { font-size: 20px; }
+            .title { font-size: 28px; }
+            .confess-title { font-size: 32px; }
+            .confess-question { font-size: 26px; }
+            .success-title { font-size: 36px; }
+            .intro-text { font-size: 16px; }
         }
     </style>
 </head>
 <body>
-    <!-- 漂浮背景 -->
-    <div class="floating-hearts" id="floatingHearts"></div>
-    <div class="sparkles"></div>
-    
     <div class="container">
-        <!-- 开场页 -->
-        <div class="page active" id="startPage">
+        <!-- 煽情开场页 -->
+        <div class="page active" id="introPage">
             <div class="heart-big">💕</div>
             <div class="title">邓欣怡小姐</div>
-            <div class="subtitle">有一道题目想请教你</div>
-            <button class="btn" onclick="startGame()">开始答题 💌</button>
+            <div class="intro-text">
+                <p>你好呀，</p>
+                <p>从认识你的那天起，</p>
+                <p>我的世界就变得不一样了。</p>
+                <p>你的笑、你的声音、你的一切，</p>
+                <p>都让我忍不住想靠近。</p>
+                <p>今天，我想认真问你几个问题...</p>
+            </div>
+            <button class="btn" onclick="startGame()">准备好了吗 💌</button>
         </div>
 
         <!-- 第一题 -->
         <div class="page" id="q1Page">
             <div class="progress">1 / 3</div>
-            <div class="progress-bar"><div class="progress-fill" style="width: 33%"></div></div>
             <div class="question-box">
                 <div class="question-title">💭 第一题</div>
                 <div class="question-text">邓欣怡小姐，你觉得我这个人怎么样？</div>
                 <div class="options">
-                    <div class="option" onclick="checkQ1(this, 'A')">A. 还行吧</div>
-                    <div class="option" onclick="checkQ1(this, 'B')">B. 一般般</div>
-                    <div class="option" onclick="checkQ1(this, 'C')">C. 很棒</div>
-                    <div class="option" onclick="checkQ1(this, 'D')">D. 超级棒！💖</div>
+                    <div class="option" onclick="checkQ1('A')"><span class="option-label">A.</span> 还行吧</div>
+                    <div class="option" onclick="checkQ1('B')"><span class="option-label">B.</span> 一般般</div>
+                    <div class="option" onclick="checkQ1('C')"><span class="option-label">C.</span> 很棒</div>
+                    <div class="option" onclick="checkQ1('D')"><span class="option-label">D.</span> 超级棒</div>
                 </div>
             </div>
         </div>
@@ -511,15 +368,14 @@
         <!-- 第二题 -->
         <div class="page" id="q2Page">
             <div class="progress">2 / 3</div>
-            <div class="progress-bar"><div class="progress-fill" style="width: 66%"></div></div>
             <div class="question-box">
                 <div class="question-title">🌟 第二题</div>
                 <div class="question-text">如果用一种天气形容我，你觉得我是？</div>
                 <div class="options">
-                    <div class="option" onclick="checkQ2(this, 'A')">A. 多云 ☁️</div>
-                    <div class="option" onclick="checkQ2(this, 'B')">B. 小雨 🌧️</div>
-                    <div class="option" onclick="checkQ2(this, 'C')">C. 晴天 ☀️</div>
-                    <div class="option" onclick="checkQ2(this, 'D')">D. 彩虹+晴空 🌈</div>
+                    <div class="option" onclick="checkQ2('A')"><span class="option-label">A.</span> 多云</div>
+                    <div class="option" onclick="checkQ2('B')"><span class="option-label">B.</span> 小雨</div>
+                    <div class="option" onclick="checkQ2('C')"><span class="option-label">C.</span> 晴天</div>
+                    <div class="option" onclick="checkQ2('D')"><span class="option-label">D.</span> 彩虹+晴空</div>
                 </div>
             </div>
         </div>
@@ -527,15 +383,14 @@
         <!-- 第三题 -->
         <div class="page" id="q3Page">
             <div class="progress">3 / 3</div>
-            <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
             <div class="question-box">
                 <div class="question-title">💖 第三题</div>
                 <div class="question-text">那你对我有多喜欢？老实交代！</div>
                 <div class="options">
-                    <div class="option" onclick="checkQ3(this, 'A')">A. 一点点</div>
-                    <div class="option" onclick="checkQ3(this, 'B')">B. 很多</div>
-                    <div class="option" onclick="checkQ3(this, 'C')">C. 超级超级多！💕</div>
-                    <div class="option" onclick="checkQ3(this, 'D')">D. 数不清啦</div>
+                    <div class="option" onclick="checkQ3('A')"><span class="option-label">A.</span> 一点点</div>
+                    <div class="option" onclick="checkQ3('B')"><span class="option-label">B.</span> 很多</div>
+                    <div class="option" onclick="checkQ3('C')"><span class="option-label">C.</span> 超级超级多</div>
+                    <div class="option" onclick="checkQ3('D')"><span class="option-label">D.</span> 数不清啦</div>
                 </div>
             </div>
         </div>
@@ -573,22 +428,6 @@
     </div>
 
     <script>
-        // 生成漂浮心形
-        function createFloatingHearts() {
-            const container = document.getElementById('floatingHearts');
-            const hearts = ['💕', '💖', '💗', '💓', '💝', '💘'];
-            for (let i = 0; i < 20; i++) {
-                const span = document.createElement('span');
-                span.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-                span.style.left = Math.random() * 100 + '%';
-                span.style.animationDuration = (8 + Math.random() * 10) + 's';
-                span.style.animationDelay = Math.random() * 10 + 's';
-                span.style.fontSize = (15 + Math.random() * 20) + 'px';
-                container.appendChild(span);
-            }
-        }
-        createFloatingHearts();
-
         let yesBtnScale = 1;
         let noClickCount = 0;
 
@@ -601,7 +440,6 @@
             showPage('q1Page');
         }
 
-        // 弹窗
         function showModal(emoji, text) {
             document.getElementById('modalEmoji').textContent = emoji;
             document.getElementById('modalText').textContent = text;
@@ -613,31 +451,48 @@
         }
 
         // 第一题：只能选D
-        function checkQ1(el, answer) {
+        function checkQ1(answer) {
             if (answer !== 'D') {
-                const messages = ['不对不对，重新选！😤', '这个答案我不接受 😤', '选D才是正确答案！😤'];
-                showModal('😤', messages[Math.floor(Math.random() * messages.length)]);
+                const messages = [
+                    '哼！这个答案我超级不满意！😤',
+                    '你再说一遍？😤',
+                    '我不听我不听！重选！😤',
+                    '这个答案让我好伤心...😭'
+                ];
+                showModal(['😤', '😤', '😤', '😭'][Math.floor(Math.random() * 4)], messages[Math.floor(Math.random() * messages.length)]);
                 return;
             }
-            el.classList.add('correct');
-            setTimeout(() => showPage('q2Page'), 800);
+            showPage('q2Page');
         }
 
-        // 第二题：随便选都过
-        function checkQ2(el, answer) {
-            el.classList.add('correct');
-            setTimeout(() => showPage('q3Page'), 800);
+        // 第二题：只能选D
+        function checkQ2(answer) {
+            if (answer !== 'D') {
+                const messages = [
+                    '才不是这个呢！😤',
+                    '你肯定是故意的！😤',
+                    '不对不对！我要彩虹！😤',
+                    '呜呜...你不爱我了...😭'
+                ];
+                showModal(['😤', '😤', '😤', '😭'][Math.floor(Math.random() * 4)], messages[Math.floor(Math.random() * messages.length)]);
+                return;
+            }
+            showPage('q3Page');
         }
 
         // 第三题：只能选C
-        function checkQ3(el, answer) {
+        function checkQ3(answer) {
             if (answer !== 'C') {
-                const messages = ['太少了！重新选 💢', '不够不够！选C！💢', '我要超级超级多的那种！💢'];
-                showModal('💢', messages[Math.floor(Math.random() * messages.length)]);
+                const messages = [
+                    '太少了！我不开心！😤',
+                    '这哪够啊！我要超级超级多！😤',
+                    '你是不是在敷衍我？😤',
+                    '呜呜...就这点喜欢吗...😭'
+                ];
+                showModal(['😤', '😤', '😤', '😭'][Math.floor(Math.random() * 4)], messages[Math.floor(Math.random() * messages.length)]);
                 return;
             }
-            el.classList.add('correct');
-            setTimeout(() => showPage('confessPage'), 800);
+            showPage('confessPage');
         }
 
         // 点愿意 → 成功
@@ -646,69 +501,24 @@
             document.getElementById('dateText').textContent = 
                 `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日 💕`;
             showPage('successPage');
-            startSuccessAnimation();
         }
 
-        // 点不愿意 → 按钮逃跑 + 愿意变大 + 哭泣飘屏
+        // 点不愿意 → 弹窗 + 愿意变大
         function sayNo() {
             noClickCount++;
-            const btn = document.getElementById('noBtn');
+            yesBtnScale += 0.2;
             const yesBtn = document.getElementById('yesBtn');
-            const container = document.querySelector('.container');
-            
-            // 愿意按钮变大
-            yesBtnScale += 0.15;
             yesBtn.style.transform = `scale(${yesBtnScale})`;
-            yesBtn.style.fontSize = (28 + noClickCount * 3) + 'px';
+            yesBtn.style.fontSize = (28 + noClickCount * 4) + 'px';
             
-            // 不愿意按钮逃跑
-            const maxX = container.offsetWidth - btn.offsetWidth - 20;
-            const newX = Math.random() * maxX;
-            const newY = 100 + Math.random() * 150;
-            btn.style.left = newX + 'px';
-            btn.style.top = newY + 'px';
-            
-            // 哭泣飘屏
-            createTearDrop();
-            
-            // 弹出提示
-            const messages = ['不许选这个！😭', '再给你一次机会 😭', '快选愿意啦！😭', '不要不要不要 😭'];
-            showModal('😭', messages[Math.min(noClickCount - 1, 3)]);
-        }
-
-        // 创建哭泣飘屏
-        function createTearDrop() {
-            const tears = ['😭', '💔', '😢', '💧'];
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    const tear = document.createElement('div');
-                    tear.className = 'tear-drop';
-                    tear.textContent = tears[Math.floor(Math.random() * tears.length)];
-                    tear.style.left = (Math.random() * window.innerWidth) + 'px';
-                    tear.style.top = '0px';
-                    tear.style.fontSize = (20 + Math.random() * 20) + 'px';
-                    document.body.appendChild(tear);
-                    setTimeout(() => tear.remove(), 3000);
-                }, i * 200);
-            }
-        }
-
-        // 成功页动画
-        function startSuccessAnimation() {
-            // 更多心形飘落
-            setInterval(() => {
-                const heart = document.createElement('span');
-                heart.textContent = ['💕', '💖', '🎉', '✨'][Math.floor(Math.random() * 4)];
-                heart.style.position = 'fixed';
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.top = '-50px';
-                heart.style.fontSize = (20 + Math.random() * 30) + 'px';
-                heart.style.animation = `floatUp ${5 + Math.random() * 5}s linear forwards`;
-                heart.style.pointerEvents = 'none';
-                heart.style.zIndex = '999';
-                document.body.appendChild(heart);
-                setTimeout(() => heart.remove(), 10000);
-            }, 500);
+            const messages = [
+                '不许选这个！😭',
+                '再给你一次机会哦 😭',
+                '快选愿意啦！😭',
+                '不要不要不要 😭',
+                '呜呜呜...你欺负我...😭😭'
+            ];
+            showModal('😭', messages[Math.min(noClickCount - 1, 4)]);
         }
     </script>
 </body>

@@ -494,7 +494,7 @@
         function rejectIntro() {
             introRejectCount = (introRejectCount || 0) + 1;
             const yesBtn = document.getElementById('introYesBtn');
-            const newScale = 1 + introRejectCount * 0.2; // 统一+20%
+            const newScale = 1 + introRejectCount * 0.35; // +35%每次
             yesBtn.style.transform = `scale(${newScale})`;
             yesBtn.style.fontSize = (24 + introRejectCount * 4) + 'px';
             

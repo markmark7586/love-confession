@@ -420,12 +420,12 @@
             <div class="progress">2 / 3</div>
             <div class="question-box">
                 <div class="question-title">🌟 第二题</div>
-                <div class="question-text">如果用一种天气形容我，你觉得我是？</div>
+                <div class="question-text">我觉得我有时候像个幼稚的小屁孩，你觉得呢？</div>
                 <div class="options">
-                    <div class="option" onclick="checkQ2('A')"><span class="option-label">A.</span> 多云</div>
-                    <div class="option" onclick="checkQ2('B')"><span class="option-label">B.</span> 小雨</div>
-                    <div class="option" onclick="checkQ2('C')"><span class="option-label">C.</span> 晴天</div>
-                    <div class="option" onclick="checkQ2('D')"><span class="option-label">D.</span> 彩虹+晴空</div>
+                    <div class="option" onclick="checkQ2('A')"><span class="option-label">A.</span> 确实很幼稚 😅</div>
+                    <div class="option" onclick="checkQ2('B')"><span class="option-label">B.</span> 幼稚但可爱 🥰</div>
+                    <div class="option" onclick="checkQ2('C')"><span class="option-label">C.</span> 不幼稚，很成熟 🤔</div>
+                    <div class="option" onclick="checkQ2('D')"><span class="option-label">D.</span> 我就喜欢这样的你 💕</div>
                 </div>
             </div>
         </div>
@@ -437,10 +437,10 @@
                 <div class="question-title">💖 第三题</div>
                 <div class="question-text">那你对我有多喜欢？老实交代！</div>
                 <div class="options">
-                    <div class="option" onclick="checkQ3('A')"><span class="option-label">A.</span> 一点点</div>
-                    <div class="option" onclick="checkQ3('B')"><span class="option-label">B.</span> 很多</div>
-                    <div class="option" onclick="checkQ3('C')"><span class="option-label">C.</span> 超级超级多</div>
-                    <div class="option" onclick="checkQ3('D')"><span class="option-label">D.</span> 数不清啦</div>
+                    <div class="option" onclick="checkQ3('A')"><span class="option-label">A.</span> 一点点 🤏</div>
+                    <div class="option" onclick="checkQ3('B')"><span class="option-label">B.</span> 很多 💝</div>
+                    <div class="option" onclick="checkQ3('C')"><span class="option-label">C.</span> 数不清啦 💕</div>
+                    <div class="option" onclick="checkQ3('D')"><span class="option-label">D.</span> 超级超级多 💖</div>
                 </div>
             </div>
         </div>
@@ -540,14 +540,14 @@
             showPage('q2Page');
         }
 
-        // 第二题：只能选D
+        // 第二题：只能选B
         function checkQ2(answer) {
-            if (answer !== 'D') {
+            if (answer !== 'B') {
                 const messages = [
-                    '才不是呢！我要彩虹 🥺',
-                    '你是不是故意的 🥺',
+                    '才不是呢！我就幼稚怎么了 🥺',
+                    '你再说一遍？我明明很可爱 🥺',
                     '不对不对！重选嘛 🥺',
-                    '呜呜...你不爱我了 🥹'
+                    '呜呜...你不觉得我可爱吗 🥹'
                 ];
                 const emojis = ['🥺', '🥺', '🥺', '🥹'];
                 const idx = Math.floor(Math.random() * 4);
@@ -562,7 +562,7 @@
             if (answer !== 'C') {
                 const messages = [
                     '太少了！我不开心 🥺',
-                    '这哪够呀！要超级多 🥺',
+                    '这哪够呀！要数不清的喜欢 🥺',
                     '你是不是敷衍我 🥺',
                     '呜呜...就这点吗 🥹'
                 ];

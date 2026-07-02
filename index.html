@@ -499,15 +499,21 @@
         }
 
         function showConsentPage() {
+            // 用户点击时播放音乐
+            const music = document.getElementById('bgMusic');
+            if (music) {
+                music.muted = false;
+                music.play().catch(e => console.log('音乐播放失败'));
+            }
             showPage('consentPage');
         }
 
         function rejectIntro() {
             introRejectCount = (introRejectCount || 0) + 1;
             const yesBtn = document.getElementById('introYesBtn');
-            const newScale = 1 + introRejectCount * 0.35;
+            const newScale = 1 + introRejectCount * 1.0; // 每次+100%
             yesBtn.style.transform = `scale(${newScale})`;
-            yesBtn.style.fontSize = (24 + introRejectCount * 4) + 'px';
+            yesBtn.style.fontSize = (24 + introRejectCount * 8) + 'px';
             
             const messages = [
                 '不要嘛...求你了 🥺',
@@ -521,12 +527,6 @@
         }
 
         function startGame() {
-            // 取消静音，开始播放音乐
-            const music = document.getElementById('bgMusic');
-            if (music) {
-                music.muted = false;
-                music.play().catch(e => console.log('音乐播放需要用户交互'));
-            }
             showPage('q1Page');
         }
 

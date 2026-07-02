@@ -493,18 +493,44 @@
         let correctModalTimer = null;
         let correctNextPage = null;
 
+        // 微信兼容：自动播放音乐
+        function initMusic() {
+            const music = document.getElementById('bgMusic');
+            if (!music) return;
+            music.muted = false;
+            const playPromise = music.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // 微信内置浏览器特殊处理
+                    if (typeof WeixinJSBridge !== 'undefined') {
+                        WeixinJSBridge.invoke('getNetworkType', {}, function() {
+                            music.play();
+                        });
+                    }
+                });
+            }
+        }
+
+        // 页面加载后尝试播放
+        window.addEventListener('load', initMusic);
+        // 微信JSBridge就绪后再次尝试
+        document.addEventListener('WeixinJSBridgeReady', initMusic);
+        // 用户第一次交互时兜底播放
+        function tryPlayOnFirstInteraction() {
+            initMusic();
+            document.removeEventListener('touchstart', tryPlayOnFirstInteraction);
+            document.removeEventListener('click', tryPlayOnFirstInteraction);
+        }
+        document.addEventListener('touchstart', tryPlayOnFirstInteraction);
+        document.addEventListener('click', tryPlayOnFirstInteraction);
+
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
         }
 
         function showConsentPage() {
-            // 用户点击时播放音乐
-            const music = document.getElementById('bgMusic');
-            if (music) {
-                music.muted = false;
-                music.play().catch(e => console.log('音乐播放失败'));
-            }
+            initMusic();
             showPage('consentPage');
         }
 
@@ -627,13 +653,13 @@
             showPage('successPage');
         }
 
-        // 点不愿意 → 弹窗 + 愿意变大
+        // 点不愿意 → 弹窗 + 愿意变大（每次+400%）
         function sayNo() {
             noClickCount++;
-            yesBtnScale += 0.2;
+            yesBtnScale = 1 + noClickCount * 4.0; // 每次+400%
             const yesBtn = document.getElementById('yesBtn');
             yesBtn.style.transform = `scale(${yesBtnScale})`;
-            yesBtn.style.fontSize = (28 + noClickCount * 4) + 'px';
+            yesBtn.style.fontSize = (28 + noClickCount * 12) + 'px';
             
             const messages = [
                 '不许选这个！🥺',

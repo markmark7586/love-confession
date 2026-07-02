@@ -654,13 +654,13 @@
             showPage('successPage');
         }
 
-        // 点不愿意 → 弹窗 + 愿意变大（每次+400%）
+        // 点不愿意 → 弹窗 + 愿意变大（每次+20%）
         function sayNo() {
             noClickCount++;
-            yesBtnScale = 1 + noClickCount * 4.0; // 每次+400%
+            yesBtnScale += 0.2; // 每次+20%
             const yesBtn = document.getElementById('yesBtn');
             yesBtn.style.transform = `scale(${yesBtnScale})`;
-            yesBtn.style.fontSize = (28 + noClickCount * 12) + 'px';
+            yesBtn.style.fontSize = (28 + noClickCount * 4) + 'px';
             
             const messages = [
                 '不许选这个！🥺',

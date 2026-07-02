@@ -64,12 +64,29 @@
         .intro-text {
             font-size: 18px;
             color: #333;
-            background: rgba(255,255,255,0.85);
-            padding: 25px 20px;
-            border-radius: 20px;
             line-height: 2.2;
+            padding: 0 10px;
+        }
+        
+        .intro-card {
+            background: rgba(255,255,255,0.9);
+            border-radius: 24px;
+            padding: 25px 20px 15px;
             margin-bottom: 30px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .intro-deco {
+            font-size: 28px;
+            margin-bottom: 10px;
+            letter-spacing: 8px;
+        }
+        
+        .intro-deco-bottom {
+            font-size: 22px;
+            margin-top: 10px;
+            letter-spacing: 6px;
         }
         
         .intro-text p {
@@ -93,6 +110,7 @@
             cursor: pointer;
             box-shadow: 0 8px 24px rgba(255,107,157,0.4);
             animation: pulse 2s infinite;
+            transition: all 0.3s;
         }
         
         .btn-no-small {
@@ -348,17 +366,21 @@
         <!-- 开场煽情页 -->
         <div class="page active" id="introPage">
             <div class="heart-big">💕</div>
-            <div class="intro-text">
-                <p>亲爱的邓欣怡小朋友，</p>
-                <p>通过相亲我们认识好久了，</p>
-                <p>我觉得我们该了解的都差不多了，</p>
-                <p>我也有一些喜欢你，</p>
-                <p>我想我们是时候推进彼此的关系了。</p>
-                <p>你愿意和我做几道测试题，</p>
-                <p>来测试我们的默契度吗？</p>
+            <div class="intro-card">
+                <div class="intro-deco">🐰 💌 🌸</div>
+                <div class="intro-text">
+                    <p>亲爱的邓欣怡小朋友 💝</p>
+                    <p>通过相亲我们认识好久了 🌸</p>
+                    <p>我觉得我们该了解的都差不多了 🐰</p>
+                    <p>我也有一些喜欢你 💕</p>
+                    <p>我想我们是时候推进彼此的关系了 🌷</p>
+                    <p>你愿意和我做几道测试题 📝</p>
+                    <p>来测试我们的默契度吗？🎯</p>
+                </div>
+                <div class="intro-deco-bottom">✨ 🎀 ✨</div>
             </div>
             <div class="btn-group-intro">
-                <button class="btn-yes-big" onclick="showConsentPage()">愿意 💖</button>
+                <button class="btn-yes-big" id="introYesBtn" onclick="showConsentPage()">愿意 💖</button>
                 <button class="btn-no-small" onclick="rejectIntro()">不愿意</button>
             </div>
         </div>
@@ -366,10 +388,14 @@
         <!-- 同意后的确认页 -->
         <div class="page" id="consentPage">
             <div class="heart-big">💕</div>
-            <div class="title">太好了！</div>
-            <div class="intro-text">
-                <p>那我们开始吧~</p>
-                <p>要认真答题哦！</p>
+            <div class="intro-card">
+                <div class="intro-deco">🎉 🎊 🎉</div>
+                <div class="title" style="color:#ff6b9d; text-shadow:none; margin-bottom:15px;">太好了！</div>
+                <div class="intro-text">
+                    <p>那我们开始吧~ 🐰</p>
+                    <p>要认真答题哦！📝</p>
+                </div>
+                <div class="intro-deco-bottom">✨ 💕 ✨</div>
             </div>
             <button class="btn" onclick="startGame()">开始答题 💌</button>
         </div>
@@ -465,6 +491,12 @@
         }
 
         function rejectIntro() {
+            introRejectCount = (introRejectCount || 0) + 1;
+            const yesBtn = document.getElementById('introYesBtn');
+            const newScale = 1 + introRejectCount * 0.15;
+            yesBtn.style.transform = `scale(${newScale})`;
+            yesBtn.style.fontSize = (24 + introRejectCount * 3) + 'px';
+            
             const messages = [
                 '不要嘛...求你了 🥺',
                 '就几道题目，很快的 🥺',

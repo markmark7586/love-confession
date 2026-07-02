@@ -520,6 +520,7 @@
         }
 
         function showCorrectModal(emoji, text, nextPage) {
+            console.log('showCorrectModal called:', emoji, text, nextPage);
             document.getElementById('modalEmoji').textContent = emoji;
             document.getElementById('modalText').textContent = text;
             document.getElementById('modal').classList.add('active');

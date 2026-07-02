@@ -407,9 +407,9 @@
                 <div class="question-title">💭 第一题</div>
                 <div class="question-text">邓欣怡小姐，你觉得我这个人怎么样？</div>
                 <div class="options">
-                    <div class="option" onclick="checkQ1('A')"><span class="option-label">A.</span> 还行吧</div>
-                    <div class="option" onclick="checkQ1('B')"><span class="option-label">B.</span> 一般般</div>
-                    <div class="option" onclick="checkQ1('C')"><span class="option-label">C.</span> 很棒</div>
+                    <div class="option" onclick="checkQ1('A')"><span class="option-label">A.</span> 还行吧 😐</div>
+                    <div class="option" onclick="checkQ1('B')"><span class="option-label">B.</span> 一般般 😶</div>
+                    <div class="option" onclick="checkQ1('C')"><span class="option-label">C.</span> 很棒 👍</div>
                     <div class="option" onclick="checkQ1('D')"><span class="option-label">D.</span> 超级无敌棒棒棒!!! 🌟</div>
                 </div>
             </div>
@@ -473,7 +473,7 @@
         <div class="modal-content">
             <div class="modal-emoji" id="modalEmoji">🥺</div>
             <div class="modal-text" id="modalText">选错啦！</div>
-            <button class="modal-btn" onclick="closeModal()">再选一次</button>
+            <button class="modal-btn" id="modalBtn" onclick="closeModal()">再选一次</button>
         </div>
     </div>
 
@@ -514,18 +514,20 @@
         }
 
         function showModal(emoji, text) {
+            document.getElementById('modalBtn').style.display = 'block';
             document.getElementById('modalEmoji').textContent = emoji;
             document.getElementById('modalText').textContent = text;
             document.getElementById('modal').classList.add('active');
         }
 
         function showCorrectModal(emoji, text, nextPage) {
-            console.log('showCorrectModal called:', emoji, text, nextPage);
+            document.getElementById('modalBtn').style.display = 'none';
             document.getElementById('modalEmoji').textContent = emoji;
             document.getElementById('modalText').textContent = text;
             document.getElementById('modal').classList.add('active');
             setTimeout(() => {
                 document.getElementById('modal').classList.remove('active');
+                document.getElementById('modalBtn').style.display = 'block';
                 showPage(nextPage);
             }, 1500);
         }

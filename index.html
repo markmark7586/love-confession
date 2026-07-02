@@ -69,6 +69,39 @@
             text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
         }
         
+        .intro-text p {
+            margin-bottom: 5px;
+        }
+        
+        .btn-group-intro {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .btn-yes-big {
+            background: linear-gradient(135deg, #ff6b9d, #ff8e53);
+            color: #fff;
+            font-size: 24px;
+            padding: 18px 60px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(255,107,157,0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        .btn-no-small {
+            background: rgba(200,200,200,0.6);
+            color: #888;
+            font-size: 16px;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+        
         .btn {
             background: linear-gradient(135deg, #ff6b9d, #ff8e53);
             color: #fff;
@@ -309,20 +342,33 @@
 </head>
 <body>
     <div class="container">
-        <!-- 煽情开场页 -->
+        <!-- 开场煽情页 -->
         <div class="page active" id="introPage">
             <div class="heart-big">💕</div>
-            <div class="title">邓欣怡小姐</div>
             <div class="intro-text">
-                <p>我好像喜欢上你了。</p>
-                <p>不是好像，是真的。</p>
-                <p>每天醒来第一个想到的是你，</p>
-                <p>睡前最后一个想的也是你。</p>
-                <p>你的笑、你的声音、你的一切，</p>
-                <p>都让我忍不住想靠近。</p>
-                <p>今天，我想认真问你几个问题...</p>
+                <p>亲爱的邓欣怡小朋友，</p>
+                <p>通过相亲我们认识好久了，</p>
+                <p>我觉得我们该了解的都差不多了，</p>
+                <p>我也有一些喜欢你，</p>
+                <p>我想我们是时候推进彼此的关系了。</p>
+                <p>你愿意和我做几道测试题，</p>
+                <p>来测试我们的默契度吗？</p>
             </div>
-            <button class="btn" onclick="startGame()">准备好了吗 💌</button>
+            <div class="btn-group-intro">
+                <button class="btn-yes-big" onclick="showConsentPage()">愿意 💖</button>
+                <button class="btn-no-small" onclick="rejectIntro()">不要</button>
+            </div>
+        </div>
+
+        <!-- 同意后的确认页 -->
+        <div class="page" id="consentPage">
+            <div class="heart-big">💕</div>
+            <div class="title">太好了！</div>
+            <div class="intro-text">
+                <p>那我们开始吧~</p>
+                <p>要认真答题哦！</p>
+            </div>
+            <button class="btn" onclick="startGame()">开始答题 💌</button>
         </div>
 
         <!-- 第一题 -->
@@ -409,6 +455,22 @@
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
+        }
+
+        function showConsentPage() {
+            showPage('consentPage');
+        }
+
+        function rejectIntro() {
+            const messages = [
+                '不要嘛...求你了 🥺',
+                '就几道题目，很快的 🥺',
+                '你忍心拒绝我吗 🥹',
+                '呜呜...好吧我再问问 🥺'
+            ];
+            const emojis = ['🥺', '🥺', '🥹', '🥺'];
+            const idx = Math.floor(Math.random() * 4);
+            showModal(emojis[idx], messages[idx]);
         }
 
         function startGame() {

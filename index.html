@@ -42,8 +42,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* 开场煽情页 */
-        .intro-page .heart-big {
+        .heart-big {
             font-size: 80px;
             animation: heartbeat 1.5s infinite;
             margin-bottom: 20px;
@@ -54,25 +53,20 @@
             50% { transform: scale(1.2); }
         }
         
-        .intro-text {
-            font-size: 18px;
-            color: #fff;
-            line-height: 2;
-            margin-bottom: 40px;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
-            padding: 0 10px;
-        }
-        
-        .intro-text p {
-            margin-bottom: 10px;
-        }
-        
         .title {
             font-size: 36px;
             font-weight: bold;
             color: #fff;
             text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
             margin-bottom: 20px;
+        }
+        
+        .intro-text {
+            font-size: 18px;
+            color: #fff;
+            line-height: 2.2;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
         }
         
         .btn {
@@ -92,7 +86,6 @@
             50% { transform: scale(1.05); }
         }
         
-        /* 答题页 */
         .progress {
             font-size: 16px;
             color: #fff;
@@ -150,25 +143,11 @@
             transform: scale(1.02);
         }
         
-        .option.correct {
-            background: linear-gradient(135deg, #ff6b9d, #ff8e53) !important;
-            color: #fff !important;
-            border-color: #ff6b9d !important;
-        }
-        
-        /* 对齐ABCD */
         .option-label {
             display: inline-block;
             width: 30px;
             font-weight: bold;
             flex-shrink: 0;
-        }
-        
-        /* 表白页 */
-        .confess-page .heart-big {
-            font-size: 100px;
-            animation: heartbeat 1.2s infinite;
-            margin-bottom: 15px;
         }
         
         .confess-title {
@@ -230,7 +209,6 @@
             z-index: 5;
         }
         
-        /* 弹窗 */
         .modal {
             display: none;
             position: fixed;
@@ -273,9 +251,6 @@
             font-size: 18px;
             cursor: pointer;
         }
-        
-        /* 成功页 */
-        .success-page { animation: fadeIn 1s ease; }
         
         .success-page .heart-big {
             font-size: 80px;
@@ -329,7 +304,6 @@
             .confess-title { font-size: 32px; }
             .confess-question { font-size: 26px; }
             .success-title { font-size: 36px; }
-            .intro-text { font-size: 16px; }
         }
     </style>
 </head>
@@ -340,9 +314,10 @@
             <div class="heart-big">💕</div>
             <div class="title">邓欣怡小姐</div>
             <div class="intro-text">
-                <p>你好呀，</p>
-                <p>从认识你的那天起，</p>
-                <p>我的世界就变得不一样了。</p>
+                <p>我好像喜欢上你了。</p>
+                <p>不是好像，是真的。</p>
+                <p>每天醒来第一个想到的是你，</p>
+                <p>睡前最后一个想的也是你。</p>
                 <p>你的笑、你的声音、你的一切，</p>
                 <p>都让我忍不住想靠近。</p>
                 <p>今天，我想认真问你几个问题...</p>
@@ -421,7 +396,7 @@
     <!-- 弹窗 -->
     <div class="modal" id="modal">
         <div class="modal-content">
-            <div class="modal-emoji" id="modalEmoji">😤</div>
+            <div class="modal-emoji" id="modalEmoji">🥺</div>
             <div class="modal-text" id="modalText">选错啦！</div>
             <button class="modal-btn" onclick="closeModal()">再选一次</button>
         </div>
@@ -454,12 +429,14 @@
         function checkQ1(answer) {
             if (answer !== 'D') {
                 const messages = [
-                    '哼！这个答案我超级不满意！😤',
-                    '你再说一遍？😤',
-                    '我不听我不听！重选！😤',
-                    '这个答案让我好伤心...😭'
+                    '呜呜...这个答案我不开心 🥺',
+                    '你再说一遍嘛 🥺',
+                    '我不听我不听，重选！🥺',
+                    '好伤心...你不喜欢我吗 🥹'
                 ];
-                showModal(['😤', '😤', '😤', '😭'][Math.floor(Math.random() * 4)], messages[Math.floor(Math.random() * messages.length)]);
+                const emojis = ['🥺', '🥺', '🥺', '🥹'];
+                const idx = Math.floor(Math.random() * 4);
+                showModal(emojis[idx], messages[idx]);
                 return;
             }
             showPage('q2Page');
@@ -469,12 +446,14 @@
         function checkQ2(answer) {
             if (answer !== 'D') {
                 const messages = [
-                    '才不是这个呢！😤',
-                    '你肯定是故意的！😤',
-                    '不对不对！我要彩虹！😤',
-                    '呜呜...你不爱我了...😭'
+                    '才不是呢！我要彩虹 🥺',
+                    '你是不是故意的 🥺',
+                    '不对不对！重选嘛 🥺',
+                    '呜呜...你不爱我了 🥹'
                 ];
-                showModal(['😤', '😤', '😤', '😭'][Math.floor(Math.random() * 4)], messages[Math.floor(Math.random() * messages.length)]);
+                const emojis = ['🥺', '🥺', '🥺', '🥹'];
+                const idx = Math.floor(Math.random() * 4);
+                showModal(emojis[idx], messages[idx]);
                 return;
             }
             showPage('q3Page');
@@ -484,12 +463,14 @@
         function checkQ3(answer) {
             if (answer !== 'C') {
                 const messages = [
-                    '太少了！我不开心！😤',
-                    '这哪够啊！我要超级超级多！😤',
-                    '你是不是在敷衍我？😤',
-                    '呜呜...就这点喜欢吗...😭'
+                    '太少了！我不开心 🥺',
+                    '这哪够呀！要超级多 🥺',
+                    '你是不是敷衍我 🥺',
+                    '呜呜...就这点吗 🥹'
                 ];
-                showModal(['😤', '😤', '😤', '😭'][Math.floor(Math.random() * 4)], messages[Math.floor(Math.random() * messages.length)]);
+                const emojis = ['🥺', '🥺', '🥺', '🥹'];
+                const idx = Math.floor(Math.random() * 4);
+                showModal(emojis[idx], messages[idx]);
                 return;
             }
             showPage('confessPage');
@@ -512,13 +493,15 @@
             yesBtn.style.fontSize = (28 + noClickCount * 4) + 'px';
             
             const messages = [
-                '不许选这个！😭',
-                '再给你一次机会哦 😭',
-                '快选愿意啦！😭',
-                '不要不要不要 😭',
-                '呜呜呜...你欺负我...😭😭'
+                '不许选这个！🥺',
+                '再给你一次机会哦 🥺',
+                '快选愿意啦！🥺',
+                '呜呜呜...你欺负我 🥹',
+                '我要哭给你看 😭'
             ];
-            showModal('😭', messages[Math.min(noClickCount - 1, 4)]);
+            const emojis = ['🥺', '🥺', '🥺', '🥹', '😭'];
+            const idx = Math.min(noClickCount - 1, 4);
+            showModal(emojis[idx], messages[idx]);
         }
     </script>
 </body>

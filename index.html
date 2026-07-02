@@ -473,7 +473,7 @@
         <div class="modal-content">
             <div class="modal-emoji" id="modalEmoji">🥺</div>
             <div class="modal-text" id="modalText">选错啦！</div>
-            <button class="modal-btn" id="modalBtn" onclick="closeModal()">再选一次</button>
+            <button class="modal-btn" id="modalBtn" onclick="handleModalBtn()">再选一次</button>
         </div>
     </div>
 
@@ -481,6 +481,8 @@
         let yesBtnScale = 1;
         let noClickCount = 0;
         let introRejectCount = 0;
+        let correctModalTimer = null;
+        let correctNextPage = null;
 
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
@@ -494,7 +496,7 @@
         function rejectIntro() {
             introRejectCount = (introRejectCount || 0) + 1;
             const yesBtn = document.getElementById('introYesBtn');
-            const newScale = 1 + introRejectCount * 0.35; // +35%每次
+            const newScale = 1 + introRejectCount * 0.35;
             yesBtn.style.transform = `scale(${newScale})`;
             yesBtn.style.fontSize = (24 + introRejectCount * 4) + 'px';
             
@@ -514,26 +516,41 @@
         }
 
         function showModal(emoji, text) {
-            document.getElementById('modalBtn').style.display = 'block';
+            correctModalTimer = null;
+            correctNextPage = null;
+            const btn = document.getElementById('modalBtn');
+            btn.textContent = '再选一次';
+            btn.style.display = 'block';
             document.getElementById('modalEmoji').textContent = emoji;
             document.getElementById('modalText').textContent = text;
             document.getElementById('modal').classList.add('active');
         }
 
         function showCorrectModal(emoji, text, nextPage) {
-            document.getElementById('modalBtn').style.display = 'none';
+            correctNextPage = nextPage;
+            const btn = document.getElementById('modalBtn');
+            btn.textContent = '下一题 →';
+            btn.style.display = 'block';
             document.getElementById('modalEmoji').textContent = emoji;
             document.getElementById('modalText').textContent = text;
             document.getElementById('modal').classList.add('active');
-            setTimeout(() => {
+            
+            correctModalTimer = setTimeout(() => {
                 document.getElementById('modal').classList.remove('active');
-                document.getElementById('modalBtn').style.display = 'block';
+                correctModalTimer = null;
                 showPage(nextPage);
-            }, 1500);
+            }, 5000);
         }
 
-        function closeModal() {
-            document.getElementById('modal').classList.remove('active');
+        function handleModalBtn() {
+            if (correctModalTimer && correctNextPage) {
+                clearTimeout(correctModalTimer);
+                correctModalTimer = null;
+                document.getElementById('modal').classList.remove('active');
+                showPage(correctNextPage);
+            } else {
+                document.getElementById('modal').classList.remove('active');
+            }
         }
 
         // 第一题：只能选D

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 给邓欣怡小姐的一封信</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #ffecd2 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* 漂浮装饰 */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .floating-hearts span {
+            position: absolute;
+            font-size: 20px;
+            animation: floatUp 10s linear infinite;
+            opacity: 0.6;
+        }
+        
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        .sparkles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .sparkles::before, .sparkles::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,182,193,0.4) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255,218,185,0.3) 0%, transparent 40%);
+            animation: sparkleMove 15s ease-in-out infinite;
+        }
+        
+        @keyframes sparkleMove {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(-30px, 30px); }
+            66% { transform: translate(30px, -30px); }
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .page {
+            display: none;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        .page.active { display: block; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        /* 开场页 */
+        .start-page .heart-big {
+            font-size: 100px;
+            animation: heartbeat 1.2s infinite;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px rgba(255,107,157,0.6));
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.15); }
+        }
+        
+        .title {
+            font-size: 42px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 50px;
+            opacity: 0.95;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #ff6b9d, #ff8e53);
+            color: #fff;
+            font-size: 22px;
+            padding: 18px 60px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255,107,157,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before { left: 100%; }
+        
+        .btn:hover {
+            transform: scale(1.08) translateY(-2px);
+            box-shadow: 0 15px 40px rgba(255,107,157,0.7);
+        }
+        
+        /* 答题页 */
+        .question-page { animation: slideUp 0.6s ease; }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .progress {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 25px;
+            font-weight: bold;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+        }
+        
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+            margin: 10px auto;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b9d, #ff8e53);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        .question-box {
+            background: rgba(255,255,255,0.92);
+            border-radius: 24px;
+            padding: 35px 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.5) inset;
+            backdrop-filter: blur(10px);
+        }
+        
+        .question-title {
+            font-size: 22px;
+            color: #ff6b9d;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .question-text {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-weight: 600;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        
+        .option {
+            background: linear-gradient(135deg, #fff5f8, #fff0f5);
+            border: 2px solid #ffd1dc;
+            border-radius: 18px;
+            padding: 18px;
+            font-size: 18px;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option:hover {
+            background: linear-gradient(135deg, #ff6b9d, #ff8e53);
+            color: #fff;
+            border-color: #ff6b9d;
+            transform: scale(1.03) translateX(5px);
+            box-shadow: 0 8px 25px rgba(255,107,157,0.3);
+        }
+        
+        .option.correct {
+            background: linear-gradient(135deg, #ff6b9d, #ff8e53) !important;
+            color: #fff !important;
+            border-color: #ff6b9d !important;
+            animation: correctPulse 0.5s ease;
+        }
+        
+        @keyframes correctPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+        
+        /* 弹窗 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.active { display: flex; animation: fadeIn 0.3s ease; }
+        
+        .modal-content {
+            background: #fff;
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            max-width: 300px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            animation: bounceIn 0.5s ease;
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .modal-emoji { font-size: 60px; margin-bottom: 15px; }
+        .modal-text { font-size: 22px; color: #333; margin-bottom: 25px; font-weight: bold; }
+        .modal-btn {
+            background: linear-gradient(135deg, #ff6b9d, #ff8e53);
+            color: #fff;
+            border: none;
+            padding: 12px 40px;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        
+        /* 表白页 */
+        .confess-page { position: relative; }
+        
+        .confess-page .heart-big {
+            font-size: 120px;
+            animation: heartbeat 1s infinite;
+            filter: drop-shadow(0 0 30px rgba(255,107,157,0.8));
+            margin-bottom: 15px;
+        }
+        
+        .confess-title {
+            font-size: 48px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.25);
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+        }
+        
+        .confess-text {
+            font-size: 32px;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 500;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+        }
+        
+        .confess-question {
+            font-size: 36px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 60px;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.25);
+            letter-spacing: 2px;
+        }
+        
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            position: relative;
+            min-height: 200px;
+        }
+        
+        .yes-btn {
+            background: linear-gradient(135deg, #ff6b9d, #ff8e53);
+            color: #fff;
+            font-size: 28px;
+            padding: 20px 70px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255,107,157,0.5);
+            transition: all 0.3s;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .yes-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(255,107,157,0.7);
+        }
+        
+        .no-btn {
+            background: rgba(200,200,200,0.8);
+            color: #888;
+            font-size: 16px;
+            padding: 12px 35px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            position: absolute;
+            transition: all 0.3s;
+            z-index: 5;
+        }
+        
+        /* 哭泣飘屏 */
+        .tear-drop {
+            position: fixed;
+            font-size: 30px;
+            animation: tearFall 3s ease-in forwards;
+            pointer-events: none;
+            z-index: 999;
+        }
+        
+        @keyframes tearFall {
+            0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+            100% { opacity: 0; transform: translateY(100vh) rotate(360deg); }
+        }
+        
+        /* 成功页 */
+        .success-page { animation: successZoom 1s ease; }
+        
+        @keyframes successZoom {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .success-page .heart-big {
+            font-size: 100px;
+            animation: heartbeat 0.8s infinite;
+            filter: drop-shadow(0 0 40px rgba(255,107,157,0.9));
+        }
+        
+        .success-title {
+            font-size: 56px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 3px 3px 12px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            animation: titleGlow 2s ease infinite;
+        }
+        
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 3px 3px 12px rgba(0,0,0,0.3), 0 0 30px rgba(255,107,157,0.5); }
+            50% { text-shadow: 3px 3px 12px rgba(0,0,0,0.3), 0 0 60px rgba(255,107,157,0.8); }
+        }
+        
+        .success-text {
+            font-size: 28px;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .success-sub {
+            font-size: 20px;
+            color: #fff;
+            opacity: 0.95;
+            margin-bottom: 35px;
+        }
+        
+        .date-text {
+            font-size: 18px;
+            color: #fff;
+            background: rgba(255,255,255,0.25);
+            padding: 12px 30px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .fireworks {
+            font-size: 60px;
+            animation: fireworksBounce 0.8s infinite;
+        }
+        
+        @keyframes fireworksBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.2); }
+        }
+        
+        .success-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* 移动端适配 */
+        @media (max-width: 480px) {
+            .title { font-size: 32px; }
+            .confess-title { font-size: 36px; }
+            .confess-question { font-size: 28px; }
+            .success-title { font-size: 42px; }
+            .question-text { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 漂浮背景 -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+    <div class="sparkles"></div>
+    
+    <div class="container">
+        <!-- 开场页 -->
+        <div class="page active" id="startPage">
+            <div class="heart-big">💕</div>
+            <div class="title">邓欣怡小姐</div>
+            <div class="subtitle">有一道题目想请教你</div>
+            <button class="btn" onclick="startGame()">开始答题 💌</button>
+        </div>
+
+        <!-- 第一题 -->
+        <div class="page" id="q1Page">
+            <div class="progress">1 / 3</div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 33%"></div></div>
+            <div class="question-box">
+                <div class="question-title">💭 第一题</div>
+                <div class="question-text">邓欣怡小姐，你觉得我这个人怎么样？</div>
+                <div class="options">
+                    <div class="option" onclick="checkQ1(this, 'A')">A. 还行吧</div>
+                    <div class="option" onclick="checkQ1(this, 'B')">B. 一般般</div>
+                    <div class="option" onclick="checkQ1(this, 'C')">C. 很棒</div>
+                    <div class="option" onclick="checkQ1(this, 'D')">D. 超级棒！💖</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第二题 -->
+        <div class="page" id="q2Page">
+            <div class="progress">2 / 3</div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 66%"></div></div>
+            <div class="question-box">
+                <div class="question-title">🌟 第二题</div>
+                <div class="question-text">如果用一种天气形容我，你觉得我是？</div>
+                <div class="options">
+                    <div class="option" onclick="checkQ2(this, 'A')">A. 多云 ☁️</div>
+                    <div class="option" onclick="checkQ2(this, 'B')">B. 小雨 🌧️</div>
+                    <div class="option" onclick="checkQ2(this, 'C')">C. 晴天 ☀️</div>
+                    <div class="option" onclick="checkQ2(this, 'D')">D. 彩虹+晴空 🌈</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第三题 -->
+        <div class="page" id="q3Page">
+            <div class="progress">3 / 3</div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
+            <div class="question-box">
+                <div class="question-title">💖 第三题</div>
+                <div class="question-text">那你对我有多喜欢？老实交代！</div>
+                <div class="options">
+                    <div class="option" onclick="checkQ3(this, 'A')">A. 一点点</div>
+                    <div class="option" onclick="checkQ3(this, 'B')">B. 很多</div>
+                    <div class="option" onclick="checkQ3(this, 'C')">C. 超级超级多！💕</div>
+                    <div class="option" onclick="checkQ3(this, 'D')">D. 数不清啦</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 表白页 -->
+        <div class="page" id="confessPage">
+            <div class="heart-big">💕</div>
+            <div class="confess-title">邓欣怡小姐</div>
+            <div class="confess-text">我喜欢你</div>
+            <div class="confess-question">愿意做我女朋友吗？</div>
+            <div class="btn-group">
+                <button class="yes-btn" id="yesBtn" onclick="sayYes()">愿意 💖</button>
+                <button class="no-btn" id="noBtn" onclick="sayNo()">不愿意</button>
+            </div>
+        </div>
+
+        <!-- 成功页 -->
+        <div class="page" id="successPage">
+            <div class="heart-big">💕💖💕</div>
+            <div class="success-title">太好啦！</div>
+            <div class="success-text">邓欣怡小姐愿意做我女朋友啦！</div>
+            <div class="success-sub">从今天开始，你就是我的专属小朋友了</div>
+            <div class="date-text" id="dateText"></div>
+            <div class="fireworks">🎉🎊🎉</div>
+        </div>
+    </div>
+
+    <!-- 弹窗 -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-emoji" id="modalEmoji">😤</div>
+            <div class="modal-text" id="modalText">选错啦！</div>
+            <button class="modal-btn" onclick="closeModal()">再选一次</button>
+        </div>
+    </div>
+
+    <script>
+        // 生成漂浮心形
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const hearts = ['💕', '💖', '💗', '💓', '💝', '💘'];
+            for (let i = 0; i < 20; i++) {
+                const span = document.createElement('span');
+                span.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                span.style.left = Math.random() * 100 + '%';
+                span.style.animationDuration = (8 + Math.random() * 10) + 's';
+                span.style.animationDelay = Math.random() * 10 + 's';
+                span.style.fontSize = (15 + Math.random() * 20) + 'px';
+                container.appendChild(span);
+            }
+        }
+        createFloatingHearts();
+
+        let yesBtnScale = 1;
+        let noClickCount = 0;
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function startGame() {
+            showPage('q1Page');
+        }
+
+        // 弹窗
+        function showModal(emoji, text) {
+            document.getElementById('modalEmoji').textContent = emoji;
+            document.getElementById('modalText').textContent = text;
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        // 第一题：只能选D
+        function checkQ1(el, answer) {
+            if (answer !== 'D') {
+                const messages = ['不对不对，重新选！😤', '这个答案我不接受 😤', '选D才是正确答案！😤'];
+                showModal('😤', messages[Math.floor(Math.random() * messages.length)]);
+                return;
+            }
+            el.classList.add('correct');
+            setTimeout(() => showPage('q2Page'), 800);
+        }
+
+        // 第二题：随便选都过
+        function checkQ2(el, answer) {
+            el.classList.add('correct');
+            setTimeout(() => showPage('q3Page'), 800);
+        }
+
+        // 第三题：只能选C
+        function checkQ3(el, answer) {
+            if (answer !== 'C') {
+                const messages = ['太少了！重新选 💢', '不够不够！选C！💢', '我要超级超级多的那种！💢'];
+                showModal('💢', messages[Math.floor(Math.random() * messages.length)]);
+                return;
+            }
+            el.classList.add('correct');
+            setTimeout(() => showPage('confessPage'), 800);
+        }
+
+        // 点愿意 → 成功
+        function sayYes() {
+            const now = new Date();
+            document.getElementById('dateText').textContent = 
+                `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日 💕`;
+            showPage('successPage');
+            startSuccessAnimation();
+        }
+
+        // 点不愿意 → 按钮逃跑 + 愿意变大 + 哭泣飘屏
+        function sayNo() {
+            noClickCount++;
+            const btn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
+            const container = document.querySelector('.container');
+            
+            // 愿意按钮变大
+            yesBtnScale += 0.15;
+            yesBtn.style.transform = `scale(${yesBtnScale})`;
+            yesBtn.style.fontSize = (28 + noClickCount * 3) + 'px';
+            
+            // 不愿意按钮逃跑
+            const maxX = container.offsetWidth - btn.offsetWidth - 20;
+            const newX = Math.random() * maxX;
+            const newY = 100 + Math.random() * 150;
+            btn.style.left = newX + 'px';
+            btn.style.top = newY + 'px';
+            
+            // 哭泣飘屏
+            createTearDrop();
+            
+            // 弹出提示
+            const messages = ['不许选这个！😭', '再给你一次机会 😭', '快选愿意啦！😭', '不要不要不要 😭'];
+            showModal('😭', messages[Math.min(noClickCount - 1, 3)]);
+        }
+
+        // 创建哭泣飘屏
+        function createTearDrop() {
+            const tears = ['😭', '💔', '😢', '💧'];
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const tear = document.createElement('div');
+                    tear.className = 'tear-drop';
+                    tear.textContent = tears[Math.floor(Math.random() * tears.length)];
+                    tear.style.left = (Math.random() * window.innerWidth) + 'px';
+                    tear.style.top = '0px';
+                    tear.style.fontSize = (20 + Math.random() * 20) + 'px';
+                    document.body.appendChild(tear);
+                    setTimeout(() => tear.remove(), 3000);
+                }, i * 200);
+            }
+        }
+
+        // 成功页动画
+        function startSuccessAnimation() {
+            // 更多心形飘落
+            setInterval(() => {
+                const heart = document.createElement('span');
+                heart.textContent = ['💕', '💖', '🎉', '✨'][Math.floor(Math.random() * 4)];
+                heart.style.position = 'fixed';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = '-50px';
+                heart.style.fontSize = (20 + Math.random() * 30) + 'px';
+                heart.style.animation = `floatUp ${5 + Math.random() * 5}s linear forwards`;
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '999';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 10000);
+            }, 500);
+        }
+    </script>
+</body>
+</html>

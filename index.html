@@ -519,6 +519,16 @@
             document.getElementById('modal').classList.add('active');
         }
 
+        function showCorrectModal(emoji, text, nextPage) {
+            document.getElementById('modalEmoji').textContent = emoji;
+            document.getElementById('modalText').textContent = text;
+            document.getElementById('modal').classList.add('active');
+            setTimeout(() => {
+                document.getElementById('modal').classList.remove('active');
+                showPage(nextPage);
+            }, 1500);
+        }
+
         function closeModal() {
             document.getElementById('modal').classList.remove('active');
         }
@@ -537,7 +547,7 @@
                 showModal(emojis[idx], messages[idx]);
                 return;
             }
-            showPage('q2Page');
+            showCorrectModal('💕', '不错不错，我们果然心有灵犀！', 'q2Page');
         }
 
         // 第二题：只能选B
@@ -554,7 +564,7 @@
                 showModal(emojis[idx], messages[idx]);
                 return;
             }
-            showPage('q3Page');
+            showCorrectModal('😎', 'oi 小鬼真厉害', 'q3Page');
         }
 
         // 第三题：只能选C
@@ -571,7 +581,7 @@
                 showModal(emojis[idx], messages[idx]);
                 return;
             }
-            showPage('confessPage');
+            showCorrectModal('💕', '我也一样喜欢你哦', 'confessPage');
         }
 
         // 点愿意 → 成功
